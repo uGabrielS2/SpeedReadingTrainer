@@ -1,0 +1,78 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background: #fdf6e3; /* amareladinho tipo papel */
+    color: #111;
+    transition: all 0.3s ease;
+  }
+  
+  header {
+    background: #eee;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: #ddd;
+  }
+  
+  .menu-btn {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+  
+  .exercise {
+    display: none;
+  }
+  
+  .exercise.active {
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #bloco-texto,
+  #rsvp-palavra,
+  #contador,
+  #colunas-container,
+  #fixacao-container,
+  #bolinhas-container,
+  #busca-container {
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem auto;
+    min-height: 100px;
+  }
+  
+  /* Bolinhas */
+  .bolinha {
+    width: 35px;
+    height: 35px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+  }
+  
+  /* Tema escuro */
+  .dark {
+    background: #111;
+    color: #eee;
+  }
+  
+  .dark header,
+  .dark nav {
+    background: #222;
+  }
+  

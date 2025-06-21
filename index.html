@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treino de Leitura Dinâmica</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Treino de Leitura Dinâmica</h1>
+    <button id="toggle-theme">🌗 Modo Escuro</button>
+  </header>
+
+  <nav>
+    <button class="menu-btn" data-target="blocos">Leitura em Blocos</button>
+    <button class="menu-btn" data-target="rsvp">Flash de Palavras</button>
+    <button class="menu-btn" data-target="busca">Busca Visual</button>
+    <button class="menu-btn" data-target="digitos">Contagem Regressiva</button>
+    <button class="menu-btn" data-target="colunas">Treino com Colunas</button>
+    <button class="menu-btn" data-target="fixacao">Fixação de Olhar</button>
+    <button class="menu-btn" data-target="bolinhas">Bolinhas nos Cantos</button>
+  </nav>
+
+  <main>
+    <section id="blocos" class="exercise hidden">
+      <h2>Leitura em Blocos</h2>
+      <div id="bloco-texto"></div>
+      <button onclick="startBlocos()">Iniciar</button>
+    </section>
+
+    <section id="rsvp" class="exercise hidden">
+        <h2>Flash de Palavras</h2>
+        <div id="rsvp-palavra"></div>
+        <label>Velocidade (PPM): <input type="number" id="ppm-rsvp" value="300" min="50" max="1000"></label>
+        <button onclick="startRSVP()">Iniciar</button>
+    </section>      
+
+    <section id="busca" class="exercise hidden">
+      <h2>Busca Visual</h2>
+      <div id="busca-container"></div>
+      <button onclick="startBusca()">Iniciar</button>
+    </section>
+
+    <section id="digitos" class="exercise hidden">
+      <h2>Contagem Regressiva</h2>
+      <div id="contador"></div>
+      <button onclick="startDigitos()">Iniciar</button>
+    </section>
+
+    <section id="colunas" class="exercise hidden">
+      <h2>Treino com Colunas</h2>
+      <div id="colunas-container"></div>
+      <button onclick="startColunas()">Iniciar</button>
+    </section>
+
+    <section id="fixacao" class="exercise hidden">
+      <h2>Fixação de Olhar</h2>
+      <div id="fixacao-container"></div>
+      <button onclick="startFixacao()">Iniciar</button>
+    </section>
+
+    <section id="bolinhas" class="exercise hidden">
+      <h2>Bolinhas nos Cantos</h2>
+      <div id="bolinhas-container"></div>
+      <label>Velocidade (ms): <input type="number" id="vel-bolinhas" value="1000"></label>
+      <label>Distância da borda (%): <input type="number" id="dist-borda" value="5" min="0" max="50"></label>
+      <button onclick="startBolinhas()">Iniciar</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
