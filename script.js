@@ -74,8 +74,11 @@ function parar() {
 function startBlocos() {
   const container = document.getElementById("bloco-texto");
   container.innerHTML = "";
+
   let i = 0;
-  const interval = setInterval(() => {
+
+  if (intervaloAtual) clearInterval(intervaloAtual);
+intervaloAtual = setInterval(() => {
     if (i >= palavrasComuns.length - 2) {
       clearInterval(interval);
       return;
@@ -93,14 +96,14 @@ function startRSVP() {
     const ppm = parseInt(document.getElementById("ppm-rsvp").value);
     const intervalo = 60000 / ppm;
   
-    if (intervaloAtual) clearInterval(intervaloAtual); // limpar se já estiver rodando
+    if (intervaloAtual) clearInterval(intervaloAtual);
 
       intervaloAtual = setInterval(() => {
       const idx = Math.floor(Math.random() * palavrasComuns.length);
       container.textContent = palavrasComuns[idx];
     }, intervalo);
   }
-  
+
 
 // Busca Visual
 function startBusca() {
@@ -108,6 +111,7 @@ function startBusca() {
   const letras = "ABCDEFGHIJKLMOPQRSTUVWXYZ";
   const alvo = "X";
   container.innerHTML = "";
+
   let content = "";
   for (let i = 0; i < 200; i++) {
     const letra = letras[Math.floor(Math.random() * letras.length)];
@@ -119,8 +123,10 @@ function startBusca() {
 // Contagem Regressiva
 function startDigitos() {
   const container = document.getElementById("contador");
+
   let i = 30;
-  const interval = setInterval(() => {
+  if (intervaloAtual) clearInterval(intervaloAtual);
+intervaloAtual = setInterval(() => {
     container.textContent = i--;
     if (i < 0) clearInterval(interval);
   }, 500);
@@ -146,13 +152,24 @@ function startColunas() {
 function startFixacao() {
   const container = document.getElementById("fixacao-container");
   container.innerHTML = "";
-  for (let i = 0; i < 5; i++) {
-    setTimeout(() => {
-      const palavra = palavrasComuns[Math.floor(Math.random() * palavrasComuns.length)];
-      container.textContent = palavra;
-    }, i * 700);
-  }
+
+  let i = 0;
+
+  if (intervaloAtual) clearInterval(intervaloAtual);
+  intervaloAtual = setInterval(() => {
+    if (i >= 5) {
+      clearInterval(intervaloAtual);
+      intervaloAtual = null;
+      return;
+    }
+
+    const palavra = palavrasComuns[Math.floor(Math.random() * palavrasComuns.length)];
+    container.textContent = palavra;
+
+    i++;
+  }, 700);
 }
+
 
 // Bolinhas nos Cantos
 function startBolinhas() {
@@ -166,7 +183,9 @@ function startBolinhas() {
     let lado = 0; // 0 = esquerda, 1 = direita
     let direcao = 1;
   
-    const interval = setInterval(() => {
+    if (intervaloAtual) clearInterval(intervaloAtual);
+  intervaloAtual = setInterval(() => {
+
       container.innerHTML = "";
   
       const percent = (linha / linhas) * 90 + 5;
