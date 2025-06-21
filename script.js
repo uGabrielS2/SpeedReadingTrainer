@@ -72,21 +72,29 @@ function parar() {
 
 // Leitura em Blocos
 function startBlocos() {
-  const container = document.getElementById("bloco-texto");
+  const container = document.getElementById("bloco-texto"); // ID correto no HTML
   container.innerHTML = "";
+
+  const ppm = parseInt(document.getElementById("ppm-blocos").value);
+  const qtdBloco = parseInt(document.getElementById("qtd-bloco").value);
+
+  const intervalo = (60000 / ppm) * qtdBloco;
 
   let i = 0;
 
   if (intervaloAtual) clearInterval(intervaloAtual);
-intervaloAtual = setInterval(() => {
-    if (i >= palavrasComuns.length - 2) {
-      clearInterval(interval);
-      return;
+  intervaloAtual = setInterval(() => {
+    if (i >= palavrasComuns.length - qtdBloco) {
+      i = 0; // recomeça do início ou use clearInterval() para parar
     }
-    container.textContent = palavrasComuns[i] + " " + palavrasComuns[i+1] + " " + palavrasComuns[i+2];
-    i += 3;
-  }, 700);
+
+    const bloco = palavrasComuns.slice(i, i + qtdBloco).join(" ");
+    container.textContent = bloco;
+
+    i += qtdBloco;
+  }, intervalo);
 }
+
 
 // RSVP
 function startRSVP() {
