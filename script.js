@@ -44,6 +44,8 @@ const palavrasComuns = ["pé", "mão", "pão", "flor", "sal", "luz", "sol", "mê
 const menuButtons = document.querySelectorAll(".menu-btn");
 const sections = document.querySelectorAll(".exercise");
 
+let intervaloAtual = null; // armazenar valor do setInterval para ser limpo depois
+
 menuButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     sections.forEach(sec => sec.classList.remove("active"));
@@ -54,6 +56,19 @@ menuButtons.forEach(btn => {
 document.getElementById("toggle-theme").addEventListener("click", () => {
   document.body.classList.toggle("dark");
 });
+
+
+function parar() {
+  if (intervaloAtual) {
+    clearInterval(intervaloAtual);
+    intervaloAtual = null;
+  }
+
+  // limpa todos os containers de exercícios
+  document.querySelectorAll(".exercise div").forEach(div => {
+    div.innerHTML = "";
+  });
+}
 
 // Leitura em Blocos
 function startBlocos() {
@@ -78,7 +93,9 @@ function startRSVP() {
     const ppm = parseInt(document.getElementById("ppm-rsvp").value);
     const intervalo = 60000 / ppm;
   
-    const interval = setInterval(() => {
+    if (intervaloAtual) clearInterval(intervaloAtual); // limpar se já estiver rodando
+
+      intervaloAtual = setInterval(() => {
       const idx = Math.floor(Math.random() * palavrasComuns.length);
       container.textContent = palavrasComuns[idx];
     }, intervalo);

@@ -27,6 +27,7 @@
       <h2>Leitura em Blocos</h2>
       <div id="bloco-texto"></div>
       <button onclick="startBlocos()">Iniciar</button>
+      <button onclick="parar()">Parar</button>
     </section>
 
     <section id="rsvp" class="exercise hidden">
@@ -34,30 +35,35 @@
         <div id="rsvp-palavra"></div>
         <label>Velocidade (PPM): <input type="number" id="ppm-rsvp" value="300" min="50" max="1000"></label>
         <button onclick="startRSVP()">Iniciar</button>
+        <button onclick="parar()">Parar</button>
     </section>      
 
     <section id="busca" class="exercise hidden">
       <h2>Busca Visual</h2>
       <div id="busca-container"></div>
       <button onclick="startBusca()">Iniciar</button>
+      <button onclick="parar()">Parar</button>
     </section>
 
     <section id="digitos" class="exercise hidden">
       <h2>Contagem Regressiva</h2>
       <div id="contador"></div>
       <button onclick="startDigitos()">Iniciar</button>
+      <button onclick="parar()">Parar</button>
     </section>
 
     <section id="colunas" class="exercise hidden">
       <h2>Treino com Colunas</h2>
       <div id="colunas-container"></div>
       <button onclick="startColunas()">Iniciar</button>
+      <button onclick="parar()">Parar</button>
     </section>
 
     <section id="fixacao" class="exercise hidden">
       <h2>Fixação de Olhar</h2>
       <div id="fixacao-container"></div>
       <button onclick="startFixacao()">Iniciar</button>
+      <button onclick="parar()">Parar</button>
     </section>
 
     <section id="bolinhas" class="exercise hidden">
@@ -66,6 +72,7 @@
       <label>Velocidade (ms): <input type="number" id="vel-bolinhas" value="1000"></label>
       <label>Distância da borda (%): <input type="number" id="dist-borda" value="5" min="0" max="50"></label>
       <button onclick="startBolinhas()">Iniciar</button>
+      <button onclick="parar()">Parar</button>
     </section>
   </main>
 
