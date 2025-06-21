@@ -181,49 +181,63 @@ function startFixacao() {
 
 // Bolinhas nos Cantos
 function startBolinhas() {
-    const container = document.getElementById("bolinhas-container");
-    container.innerHTML = "";
-    const speed = parseInt(document.getElementById("vel-bolinhas").value);
-    const distBorda = parseFloat(document.getElementById("dist-borda").value); // distância em %
-  
-    const linhas = 10;
-    let linha = 0;
-    let lado = 0; // 0 = esquerda, 1 = direita
-    let direcao = 1;
-  
-    if (intervaloAtual) clearInterval(intervaloAtual);
-  intervaloAtual = setInterval(() => {
+  const overlay = document.getElementById("overlay-treino");
+  const container = document.getElementById("bolinhas-container");
 
-      container.innerHTML = "";
-  
-      const percent = (linha / linhas) * 90 + 5;
-      const top = `${percent}%`;
-  
-      const dot = document.createElement("div");
-      dot.classList.add("bolinha");
-      dot.style.top = top;
-  
-      if (lado === 0) {
-        dot.style.left = `${distBorda}%`;
-        dot.style.removeProperty("right"); // remove qualquer valor anterior
-      } else {
-        dot.style.right = `${distBorda}%`;
-        dot.style.removeProperty("left"); // remove qualquer valor anterior
-      }
-  
-      container.appendChild(dot);
-  
-      lado = 1 - lado;
-  
-      if (lado === 0) {
+  // Garante que está limpo e visível
+  container.innerHTML = "";
+  overlay.classList.add("active");
+
+  const speed = parseInt(document.getElementById("vel-bolinhas").value);
+  const distBorda = parseFloat(document.getElementById("dist-borda").value);
+
+  const linhas = 10;
+  let linha = 0;
+  let lado = 0;
+  let direcao = 1;
+
+  // Remover qualquer clique anterior para não duplicar
+  document.onclick = null;
+
+  // Adiciona evento de clique global para interromper
+  setTimeout(() => {
+    document.onclick = () => {
+      parar();
+      overlay.classList.remove("active");
+      document.onclick = null;
+    };
+  }, 200); // atraso para evitar clique no botão
+
+  if (intervaloAtual) clearInterval(intervaloAtual);
+  intervaloAtual = setInterval(() => {
+    container.innerHTML = "";
+
+    const percent = (linha / linhas) * 90 + 5;
+    const top = `${percent}%`;
+
+    const dot = document.createElement("div");
+    dot.classList.add("bolinha");
+    dot.style.top = top;
+
+    if (lado === 0) {
+      dot.style.left = `${distBorda}%`;
+      dot.style.removeProperty("right");
+    } else {
+      dot.style.right = `${distBorda}%`;
+      dot.style.removeProperty("left");
+    }
+
+    container.appendChild(dot);
+
+    lado = 1 - lado;
+
+    if (lado === 0) {
+      linha += direcao;
+      if (linha > linhas || linha < 0) {
+        direcao *= -1;
         linha += direcao;
-  
-        if (linha > linhas || linha < 0) {
-          direcao *= -1;
-          linha += direcao;
-        }
       }
-  
-    }, speed);
-  }
-  
+    }
+  }, speed);
+}
+

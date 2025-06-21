@@ -65,6 +65,25 @@ body {
     position: absolute;
   }
   
+  #overlay-treino {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: none;
+  }
+  
+  #overlay-treino.active {
+    display: block;
+  }
+  
+  #overlay-treino .bolinha {
+    background-color: white;
+  }  
+  
   /* Tema escuro */
   .dark {
     background: #111;
