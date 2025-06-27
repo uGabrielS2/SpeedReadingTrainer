@@ -27,7 +27,8 @@ const palavrasComuns = ["pé", "mão", "pão", "flor", "sal", "luz", "sol", "mê
 "aguardar", "comprar", "defender", "enviar", "formar", "gerar", "hesitar", "impactar", "lançar", "merecer",
 "notar", "operar", "preparar", "registrar", "superar", "tolerar", "urgente", "viajar", "administrar",
 "compartilhar", "decidir", "educar", "financiar", "garantir", "investigar", "lamentar", "manipular",
-"necessitar", "observar", "participar", "representar", "significar", "transformar", "unificar", "validar", "analisar", "construir", "distribuir", "elaborar", "fortalecer", "identificar", "informar", "justificar",
+"necessitar", "observar", "participar", "representar", "significar", "transformar", "unificar", "validar", "analisar",
+ "construir", "distribuir", "elaborar", "fortalecer", "identificar", "informar", "justificar",
 "liderar", "manter", "otimizar", "personalizar", "resolver", "solucionar", "trabalhar", "verificar",
 "abordar", "comunicar", "desenvolver", "estimular", "facilitar", "gerenciar", "implementar", "inovar",
 "otimizar", "planejar", "promover", "revisar", "sintetizar", "utilizar", "avaliar", "colaborar",
@@ -128,18 +129,22 @@ function startBusca() {
   container.innerHTML = content;
 }
 
-// Contagem Regressiva
 function startDigitos() {
   const container = document.getElementById("contador");
+  
+  const npmN = parseInt(document.getElementById("npm-numeros").value);
 
-  let i = 30;
-  if (intervaloAtual) clearInterval(intervaloAtual);
-intervaloAtual = setInterval(() => {
-    container.textContent = i--;
-    if (i < 0) clearInterval(interval);
-  }, 500);
+  const ppmConversion = (60000 / npmN);
+
+  if (intervaloAtual) {
+    clearInterval(intervaloAtual);
+  }
+
+  intervaloAtual = setInterval(() => {
+    const numeroAleatorio = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    container.textContent = numeroAleatorio;
+  }, ppmConversion);
 }
-
 // Colunas
 function startColunas() {
   const container = document.getElementById("colunas-container");
@@ -178,66 +183,61 @@ function startFixacao() {
   }, 700);
 }
 
-
-// Bolinhas nos Cantos
-function startBolinhas() {
+function startBolinhasPagina() {
   const overlay = document.getElementById("overlay-treino");
   const container = document.getElementById("bolinhas-container");
-
-  // Garante que está limpo e visível
   container.innerHTML = "";
   overlay.classList.add("active");
 
   const speed = parseInt(document.getElementById("vel-bolinhas").value);
-  const distBorda = parseFloat(document.getElementById("dist-borda").value);
+  const dist = parseFloat(document.getElementById("dist-borda").value);
 
-  const linhas = 10;
-  let linha = 0;
-  let lado = 0;
-  let direcao = 1;
+  if (intervaloAtual) clearInterval(intervaloAtual);
 
-  // Remover qualquer clique anterior para não duplicar
-  document.onclick = null;
+  const dot = document.createElement("div");
+  dot.classList.add("bolinha");
+  dot.style.position = "absolute";
+  container.appendChild(dot);
 
-  // Adiciona evento de clique global para interromper
+  const W = overlay.clientWidth;
+  const H = overlay.clientHeight;
+  const marginX = (dist/100)*W;
+  const marginY = (dist/100)*H;
+  const left = marginX;
+  const right = W - marginX - dot.clientWidth;
+  const top = marginY;
+  const bottom = H - marginY - dot.clientHeight;
+  const lineStep = 40;
+
+  let x = left, y = top;
+  let dirX = 1, dirY = 1;
+
+  dot.style.left = `${x}px`; dot.style.top = `${y}px`;
+
+  intervaloAtual = setInterval(() => {
+    x += dirX * ( (right-left) / ( (right-left)/10 ) );
+    if ((dirX === 1 && x >= right) || (dirX === -1 && x <= left)) {
+      x = dirX === 1 ? right : left;
+      y += dirY * lineStep;
+      if (y > bottom || y < top) {
+        dirY *= -1;
+        y += dirY * lineStep;
+      }
+      dirX *= -1;
+    }
+    dot.style.left = `${x}px`;
+    dot.style.top = `${y}px`;
+  }, speed);
+
   setTimeout(() => {
     document.onclick = () => {
       parar();
       overlay.classList.remove("active");
       document.onclick = null;
     };
-  }, 200); // atraso para evitar clique no botão
-
-  if (intervaloAtual) clearInterval(intervaloAtual);
-  intervaloAtual = setInterval(() => {
-    container.innerHTML = "";
-
-    const percent = (linha / linhas) * 90 + 5;
-    const top = `${percent}%`;
-
-    const dot = document.createElement("div");
-    dot.classList.add("bolinha");
-    dot.style.top = top;
-
-    if (lado === 0) {
-      dot.style.left = `${distBorda}%`;
-      dot.style.removeProperty("right");
-    } else {
-      dot.style.right = `${distBorda}%`;
-      dot.style.removeProperty("left");
-    }
-
-    container.appendChild(dot);
-
-    lado = 1 - lado;
-
-    if (lado === 0) {
-      linha += direcao;
-      if (linha > linhas || linha < 0) {
-        direcao *= -1;
-        linha += direcao;
-      }
-    }
-  }, speed);
+  }, 200);
 }
 
+function parar() {
+  clearInterval(intervaloAtual);
+}

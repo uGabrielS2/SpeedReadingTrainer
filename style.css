@@ -1,7 +1,7 @@
 body {
     font-family: sans-serif;
     margin: 0;
-    background: #fdf6e3; /* amareladinho tipo papel */
+    background: #fdf6e3; /* amarelado tipo papel */
     color: #111;
     transition: all 0.3s ease;
   }
@@ -41,6 +41,12 @@ body {
   
   .hidden {
     display: none;
+  }
+
+  .colunas {
+
+    text-align: center;
+
   }
   
   #bloco-texto,

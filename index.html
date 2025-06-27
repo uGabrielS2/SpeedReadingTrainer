@@ -53,7 +53,8 @@
     </section>
 
     <section id="digitos" class="exercise hidden">
-      <h2>Contagem Regressiva</h2>
+      <h2>Digitos</h2>
+      <label>Velocidade (PPM): <input type="number" id="npm-numeros" value="300" min="1" max="1000"></label>
       <button onclick="startDigitos()">Iniciar</button>
       <button onclick="parar()">Parar</button>
       <div id="contador"></div>
@@ -64,8 +65,7 @@
       <h2>Treino com Colunas</h2>      
       <button onclick="startColunas()">Iniciar</button>
       <button onclick="parar()">Parar</button>
-      <div id="colunas-container"></div>
-
+      <div id="colunas-container" class="colunas"></div>
     </section>
 
     <section id="fixacao" class="exercise hidden">
@@ -79,7 +79,7 @@
       <h2>Bolinhas nos Cantos</h2>
       <label>Velocidade (ms): <input type="number" id="vel-bolinhas" value="500"></label>
       <label>Distância da borda (%): <input type="number" id="dist-borda" value="5" min="0" max="50"></label>
-      <button onclick="startBolinhas()">Iniciar</button>
+      <button onclick="startBolinhasPagina()">Iniciar</button>
       <button onclick="parar()">Parar</button>
       <div id="overlay-treino">
         <div id="bolinhas-container"></div>
